@@ -1,0 +1,217 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json", 
+    "width": 1000, 
+    "height": 500, 
+    "title": "", 
+    "data": {
+        "url": "https://raw.githubusercontent.com/lai282/3179/main/world-data-2023.csv"
+    }, 
+    "transform": [
+      {
+            "calculate": "datum['GDP'] / datum['Population']", 
+            "as": "GDP_Per_Capita"
+          }, 
+          {
+            "filter": "datum['Continent'] == 'Asia' || datum['Continent'] == 'Americas' || datum['Continent'] == 'Africa' || datum['Continent'] == 'Europe' || datum['Continent'] == 'Oceania'"
+          }
+    ],
+    "params": [
+      {
+        "name": "continent_selection", 
+        "bind": {
+            "input": "select", 
+            "options": [null, "Africa", "Americas", "Asia", "Europe", "Oceania"], 
+            "labels": ["World", "Africa", "Americas", "Asia", "Europe", "Oceania"], 
+            "name": "Continent: "
+        }
+      }
+    ], 
+    "layer": [
+      {
+        "mark": "rule", 
+        "encoding": {
+          "x": {
+            "value": 0
+          }, 
+          "y": {
+            "field": "Population_Labor_force_participation", 
+            "type": "quantitative", 
+            "axis": {
+              "grid": false, 
+              "title": null
+            } 
+          }
+        }
+      },
+      {
+        "mark": "rule", 
+        "encoding": {
+          "x": {"value": 0},
+          "y": {
+            "field": "Unemployment_rate", 
+            "type": "quantitative", 
+            "axis": {
+              "grid": false, 
+              "title": null, 
+              "orient": "left", 
+              "offset": {
+                "expr": "-width/3"
+              }
+            }
+          }
+        }
+      }, 
+      {
+        "mark": "rule", 
+        "encoding": {
+          "x": {"value": 0},
+          "y": {
+            "field": "Life_expectancy", 
+            "type": "quantitative", 
+            "axis": {
+              "grid": false, 
+              "title": null, 
+              "orient": "left", 
+              "offset": {
+                "expr": "-width/1.5"
+              }
+            }
+          }
+        }
+      }, 
+      {
+        "mark": "rule", 
+        "encoding": {
+          "x": {"value": 0},
+          "y": {
+            "field": "GDP_Per_Capita", 
+            "type": "quantitative", 
+            "axis": {
+              "grid": false, 
+              "title": null, 
+              "orient": "right"
+            }
+          }
+        }
+      }, 
+      {
+        "transform": [
+          {
+            "calculate": "['Population_Labor_force_participation', 'Unemployment_rate', 'Life_expectancy', 'GDP_Per_Capita']", 
+            "as": "x"
+          }, 
+          {
+            "calculate": "[height - scale('layer_0_y', datum.Population_Labor_force_participation), height - scale('layer_1_y', datum.Unemployment_rate), height - scale('layer_2_y', datum.Life_expectancy), height - scale('layer_3_y', datum.GDP_Per_Capita)]",
+            "as": "y"
+          }, 
+          {
+            "flatten": ["x", "y"]
+          }, 
+          {
+          "filter": "continent_selection == null || datum.Continent == continent_selection"
+          }
+        ], 
+        "params": [
+          {
+            "name": "hover", 
+            "select":{
+              "type": "point",
+              "fields": ["Country"], 
+              "on": "mouseover"
+            }
+          }
+        ],
+        "mark": {
+          "type": "line", 
+          "point": true, 
+          "line": {
+              "strokeWidth": 1000
+          }
+        }, 
+        "encoding": {
+          "opacity": {
+            "condition": {
+              "param": "hover", 
+              "value": 0.8
+            },
+            "value": 0.02
+          },
+          "x": {
+            "field": "x",
+            "sort": null,
+            "type": "ordinal",
+            "scale": {
+              "type": "point", 
+              "padding": 0
+            },
+            "axis": {
+              "title": null, 
+              "labelAngle": 0, 
+              "domain": false
+            }
+          }, 
+          "y": {
+            "field": "y", 
+            "type": "quantitative", 
+            "axis": null
+          },
+          "color": {
+            "field": "Country", 
+            "type": "nominal", 
+            "scale": {
+              "scheme": "tableau20"
+            }
+          }, 
+          "tooltip":[
+            {
+              "field": "Country", 
+              "type": "nominal"
+            }, 
+            {
+              "field": "Continent", 
+              "type": "nominal"
+            }, 
+            {
+              "field": "Population_Labor_force_participation", 
+              "type": "quantitative", 
+              "title": "Labor Force Participation Population (%)"
+            }, 
+            {
+              "field": "Unemployment_rate", 
+              "type": "quantitative", 
+              "title": "Unemployment Rate (%)"
+            }, 
+            {
+                "field": "Life_expectancy", 
+                "type": "quantitative", 
+                "title": "Life Expectancy (years)"
+            }, 
+            {
+                "field": "GDP_Per_Capita", 
+                "type": "quantitative", 
+                "title": "GDP per capita" 
+            },
+            {
+              "field": "GDP", 
+              "type": "quantitative" 
+            }, 
+            {
+              "field": "Population", 
+              "type": "quantitative" 
+            }
+          ] 
+        }
+      } 
+    ], 
+    "resolve":{
+      "scale": {
+        "y": "independent"
+      }
+    }, 
+    "config": {
+      "padding": 0, 
+      "view": {
+        "stroke": null
+      }
+    }
+  }
