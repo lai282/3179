@@ -1,0 +1,86 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json", 
+    "width": 1000, 
+    "height": 500, 
+    "title": "Relationship between Agricultural Land and GDP Per Capita", 
+    "data": {
+        "url": "https://raw.githubusercontent.com/lai282/3179/main/world-data-2023.csv"
+    }, 
+    "transform": [
+      {
+        "calculate": "datum['GDP'] / datum['Population']", 
+        "as": "GDP_Per_Capita"
+      }, 
+      {
+        "filter": "datum['Continent'] == 'Asia' || datum['Continent'] == 'Americas' || datum['Continent'] == 'Africa' || datum['Continent'] == 'Europe' || datum['Continent'] == 'Oceania'"
+      }
+    ], 
+    "mark": "bar",
+    "encoding": {
+      "facet": {
+        "field": "Continent", 
+        "type": "ordinal", 
+        "columns": 1, 
+        "sort": {
+          "op": "min", 
+          "field": "GDP_Per_Capita"
+        }
+      }, 
+      "x": {
+        "field": "GDP_Per_Capita", 
+        "type": "quantitative", 
+        "title": "GDP Per Capita"
+      },
+      "y": {
+        "field": "Country", 
+        "type": "nominal"
+      }, 
+      "color": {
+        "field": "Agricultural_Land", 
+        "type": "quantitative", 
+        "title": "Agricultural Land (%)", 
+        "scale": {
+          "type": "threshold", 
+          "domain": [10, 30, 50, 70], 
+          "range": ["#D9BF77", "#C8A037", "#A9842E", "#8E6B23", "#704C1B"]
+        }
+      }, 
+      "tooltip": [
+        {
+          "field": "Country", 
+          "type": "nominal"
+        }, 
+        {
+            "field": "Agricultural_Land", 
+            "type": "quantitative", 
+            "title": "Agricultural Land (%)"
+        }, 
+        {
+          "field": "GDP_Per_Capita", 
+          "type": "quantitative", 
+          "title": "GDP per capita"
+        },
+        {
+          "field": "GDP", 
+          "type": "quantitative" 
+        }, 
+        {
+          "field": "Population", 
+          "type": "quantitative" 
+        }
+      ]
+    }, 
+    "resolve": {
+      "axis": {
+        "y": "independent"
+      }, 
+      "scale": {
+        "y": "independent"
+      }
+    }, 
+    "config": {
+      "axis": {
+        "grid": false
+      }
+    } 
+  }
