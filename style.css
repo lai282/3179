@@ -1,0 +1,94 @@
+html, body{
+    background-color: #E8FFFE;
+}
+
+#title{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight:bold;
+    text-align:center;
+}
+
+#subtitle{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    text-align:center;
+}
+
+#normal_text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    text-align:left;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+#points{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    text-align:left;
+    padding-left: 40px;
+}
+
+#bold{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#findings{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 160px;
+}
+
+#findings_text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    padding-left: 160px;
+    padding-right: 160px;
+}
+
+#keyword_1{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color:blue;
+}
+
+#keyword_2{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color:brown;
+}
+
+#keyword_3{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color:green;
+}
+
+#keyword_4{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: orange;
+}
+
+#keyword_5{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: purple;
+}
+
+.visualisation_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:'Open Sans', sans-serif;
+}
