@@ -1,0 +1,128 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json", 
+    "width": 1000, 
+    "height": 500, 
+    "title": "Relationship between Population Density and Land Area", 
+    "params": [
+      {
+        "name": "zoom_level", 
+        "value": 200, 
+        "bind": {
+          "input": "range", 
+          "min": 200, 
+          "max": 1000, 
+          "step": 100, 
+          "name": "Zoom: "
+        }
+      }, 
+      {
+        "name": "map_center", 
+        "value": [0,0], 
+        "bind": {
+          "input": "select", 
+          "options":[
+            [0,0], 
+            [21.0938, 7.1881], 
+            [108.4276, 14.6517], 
+            [8.8137, 53.0838], 
+            [-100.4782, 46.6033], 
+            [153.399994, -28.016666], 
+            [-51.9253, -14.2350]
+          ],
+          "labels": [
+            "World", 
+            "Africa", 
+            "Asia", 
+            "Europe", 
+            "North America", 
+            "Oceania", 
+            "South America"
+          ],
+          "name": "Continent: "
+        }
+      }
+    ],
+    "projection": {
+        "type": "equalEarth", 
+        "scale": {
+          "expr": "zoom_level"
+        }, 
+        "center": {
+          "expr": "map_center"
+        }
+    }, 
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson", 
+                "format": {
+                    "type": "topojson", 
+                    "feature": "ne_110m_admin_0_countries"
+                }
+            }, 
+            "mark": {
+                "type": "geoshape", 
+                "fill": "lightgray", 
+                "stroke": "black"
+            }
+        }, 
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/lai282/3179/main/world-data-2023.csv"
+            }, "transform":[
+              {
+                "calculate": "datum['Land_Area']+0.1", 
+                "as": "Land_Area_Log"
+              }
+            ],
+            "mark": {
+                "type": "circle"
+            }, 
+            "encoding": {
+                "longitude": {
+                    "field": "Longitude", 
+                    "type": "quantitative"
+                }, 
+                "latitude": {
+                    "field": "Latitude", 
+                    "type": "quantitative"
+                }, 
+                "color": {
+                    "field": "Population_Density", 
+                    "type": "quantitative", 
+                    "title": "Population Density (P/Km2)", 
+                    "scale": {
+                        "type": "threshold", 
+                        "domain": [100, 1000, 10000],
+                        "range": ["#6baed6", "#4292c6", "#08519c", "#041732"]
+                    }
+                },  
+                "size": {
+                  "field": "Land_Area", 
+                  "type": "quantitative",
+                  "title": "Land Area (Log)",
+                  "scale": {
+                    "type": "sqrt",  
+                    "range": [10, 500]
+                  }
+                },
+                "tooltip": [
+                    {
+                        "field": "Country", 
+                        "type": "nominal"
+                    }, 
+                    {
+                        "field": "Population_Density", 
+                        "type": "quantitative", 
+                        "title": "Population Density (P/km2)"
+                    }, 
+                    {
+                        "field": "Land_Area", 
+                        "type": "quantitative", 
+                        "title": "Land Area (km2)"
+                    }
+                ]
+            }
+        }
+    ]
+}
