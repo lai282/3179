@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <!-- import font style -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+        <!-- style elements -->
+        <link rel="stylesheet" href="style.css">
+
+        <!-- visualisations-->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+        <script src="viz.js"></script>
+        
+
+        <!-- title -->
+        <title> Factors Impacting the Economy</title>
+    </head>
+
+    <body>
+        <!-- title -->
+        <div id = "title"> Factor Impacting the Economy </div>
+        
+        <!-- description -->
+        <div id = "normal_text"> This dashboard provides a holistic view of key factors that impact a country's economic growth and stability. The featured factors are as follows: </div>
+        <div id = "points"> • <span id = "bold"> Population Density </span> and <span id = "bold"> Land Area </span> that shows the spatial distribution pattern  </div>
+        <div id = "points"> &nbsp; > Indicating the level urbanization and its influence on economic activities.  </div>
+        <div id = "points"> • <span id = "bold"> Agricultural </span> Sector </div>
+        <div id = "points"> &nbsp; > Role of argricultural sector in the economy. </div>
+        <div id = "points"> • <span id = "bold"> Labor Market </span> Dynamics </div>
+        <div id = "points"> &nbsp; > Operation in labor markets and how they respond to changes in economic conditions. </div>
+        <div id = "normal_text"> <br> </div>
+
+        <!-- part 1 -->
+        <div id = "subtitle"> Spatial Distribution Pattern of Country </div>
+        <div id = "normal_text"> This map helps in understanding how popularity is distributed spatially across the world. We can reveal the following spatial distribution patterns by studying the relationship between popularity density and land area: </div>
+        <div id = "points"> • <span id = "bold"> Urbanization </span></div>
+        <div id = "points"> &nbsp; > Indicated by high population density in urban areas. Mostly characterized by dense populations and significant economic and industrial activity. </div>
+        <div id = "points"> • <span id = "bold"> Rural Areas </span></div>
+        <div id = "points"> &nbsp; > Low population density in vast land areas. Population are sparse and economic activities may be centered around agriculture and natural resource extraction.  </div>
+        <div id = "points"> • <span id = "bold"> Regional Disparities </span></div>
+        <div id = "points"> &nbsp; > Variations in population density across different regions.  </div>
+        <div id = "normal_text"> <br> </div>
+
+        <!-- visualisation 1 -->
+        <!-- map to study the spatial distribution pattern of the world -->
+        <div class = "visualisation_container">
+            <div id = "viz1_id"></div>
+        </div>
+        <!-- findings -->
+        <div id = "findings"> Findings: </div>
+        <div id = "findings_text"> • <span id = "keyword_1"> Monaco </span> in Europe and <span id = "keyword_1"> Singapore </span> in Asia are the <span id = "keyword_1"> most urbanized </span> country as they have a very high population density considered their land area is small. </div>
+        <div id = "findings_text"> • <span id = "keyword_2"> Russia </span>, <span id = "keyword_2"> Australia </span> and <span id = "keyword_2"> Canada </span> are the countries with a <span id = "keyword_2"> significant rural population </span> due to its low population density and vast land area. These countries are among the top countries that <span id = "keyword_2"> has the most natural resources </span>. </div>
+        <div id = "findings_text"> • <span id = "keyword_1"> Asia </span> is the <span id = "keyword_1"> most populous continent </span> in the world while <span id = "keyword_2"> Oceania </span> has the <span id = "keyword_2"> lowest population densities </span> in the world. </div>
+        <div id = "normal_text"> <br> </div>
+
+        <div id = "normal_text"> The following bubble plot shows the relationship between level of urbanization calculated using popularity density and land area and GDP per capita of each country.  </div>
+
+        <!-- visualisation 2 -->
+        <!-- study relationship between spatial distribution pattern and the GDP -->
+        <div class = "visualisation_container">
+            <div id = "viz2_id"></div>
+        </div>
+        <!-- findings -->
+        <div id = "findings"> Findings: </div>
+        <div id = "findings_text"> • <span id = "keyword_1"> Monaco </span> and <span id = "keyword_1"> Liechtenstein </span> has the <span id = "keyword_1"> highest </span> GDP per capita.  </div>
+        <div id = "findings_text"> • <span id = "keyword_1"> Monaco</span>, being the <span id = "keyword_1"> most urbanized </span> country also has the <span id = "keyword_1"> highest standard of living and economic well being for an average person </span> as they have the highest GDP per capita. </div>
+        <div id = "findings_text"> • Despite having <span id = "keyword_2"> significant rural population</span>, <span id = "keyword_2"> Australia </span> and <span id = "keyword_2"> Canada </span> has <span id = "keyword_2"> good standard of living and economic well being for an average person</span>. This may due to their <span id = "keyword_1"> abundant natural resources </span> as they are known as having the most natural resources. </div>
+        <div id = "findings_text"> • <span id = "keyword_1"> Europe </span> averagely has the <span id = "keyword_1"> highest standards of living and economic well-being </span> while <span id = "keyword_2"> Africa </span> has the <span id = "keyword_2"> lowest</span>.</div>
+        <div id = "normal_text"> <br> </div>
+
+        <!-- part 2 -->
+        <div id = "subtitle"> Role of Agricultural Sector </div>
+        <div id = "normal_text"> The following bar chart compares the GDP per capita of different countries and regions and assesses how much their land is dedicated to agricultural activites. </div>
+        <div id = "normal_text"> <br> </div>
+
+        <!-- visualisation 3 -->
+        <!-- study how agriculture land affect economy of the country -->
+        <div class = "visualisation_container">
+            <div id = "viz3_id"></div>
+        </div>
+        <!-- findings -->
+        <div id = "findings"> Findings: </div>
+        <div id = "findings_text"> • Among the countries with <span id = "keyword_3"> high agricultural land use</span>, <span id = "keyword_3">United Kingdom </span> has the <span id = "keyword_3"> highest GDP per capita</span>. This demonstrates that the country's ability to <span id = "keyword_3"> successfully balance agriculture with other sectors</span>, resulting <span id = "keyword_3"> high standard of living and economic well-being for its people</span>. </div>
+        <div id = "findings_text"> • <span id = "keyword_1"> Liechtenstein</span>, having one the <span id = "keyword_1"> highest GDP per capita</span> has only around <span id = "keyword_1"> 30% </span> of its land dedicated to agriculture, indicating it <span id = "keyword_1"> has strong non-economic sectors</span> contribute significantly to its economic success. </div>
+        <div id = "findings_text"> • Despite having <span id = "keyword_2"> significant rural population</span>, <span id = "keyword_2"> Australia </span> and <span id = "keyword_2"> Canada </span> has <span id = "keyword_2"> successfully diversified their economies beyond agriculture </span>, relying on natural resources and other industries to have <span id = "keyword_2"> high standard of living for their population</span>. </div>
+        <div id = "normal_text"> <br> </div>
+        
+        <!-- part 3 -->
+        <div id = "subtitle"> Labor Market Dynamics </div>
+        <div id = "normal_text"> The following parallel coordinate plot will illustrates the labor market dynamics in various countries and explore the relationship between the labor force participation percentage, unemployment rate, life expectancy, and GDP per capita. </div>
+
+        <!-- visualisation 4 -->
+        <!---->
+        <div class = "visualisation_container">
+            <div id = "viz4_id"></div>
+        </div>
+        <!-- findings -->
+        <div id = "findings"> Findings: </div>
+        <div id = "findings_text"> • Countries with <span id = "keyword_1"> higher GDP per capita</span> have <span id = "keyword_3"> high percentage of labor force participation population</span>, <span id="keyword_3"> low unemployment rate</span> and <span id = "keyword_3"> high life expentancy</span>. This can shows that countries with robust economies tend to contribute to <span id = "keyword_4"> better health outcomes for citizens</span> and having <span id = "keyword_4"> healthy job market and job security</span>. </div>
+        <div id = "findings_text"> • Countries with <span id = "keyword_2"> high unemployment rate </span>  exhibits <span id = "keyword_2"> lower GDP per capita</span>. This shows how <spand id = "keyword_5"> unemployment affects greatly </spand> the economic prosperity of the country. </div>
+        <div id = "findings_text"> • There are also countries with <spand id = "keyword_1"> high percentage of labor force participation population </spand> and <span id = "keyword_1"> low employment rate </span> having <span id = "keyword_2"> low GDP per capita</span>. There may be <span id = "keyword_3"> other factors </span> playing a significant role in shaping the economy of a country and further exploration is needed. </div>
+        <div id = "normal_text"> <br> </div>
+
+    </body>
+</html>
