@@ -1,0 +1,176 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json", 
+    "width": 1000, 
+    "height": 500, 
+    "title": "Relationship between Level of Urbanization and GDP Per Captia", 
+    "data": {
+      "url": "https://raw.githubusercontent.com/lai282/3179/main/world-data-2023.csv"
+    }, 
+    "transform": [
+      {
+        "calculate": "datum['Land_Area']+0.1", 
+        "as": "Land_Area_Log"
+      }, 
+      {
+        "calculate": "datum['Population_Density']+0.1", 
+        "as": "Population_Density_Log"
+      }, 
+      {
+        "calculate": "datum['GDP'] / datum['Population']", 
+        "as": "GDP_Per_Capita"
+      }, 
+      {
+        "filter": "continent_selection == null || datum.Continent == continent_selection"
+      }, 
+      {
+        "filter": "datum['Continent'] == 'Asia' || datum['Continent'] == 'Americas' || datum['Continent'] == 'Africa' || datum['Continent'] == 'Europe' || datum['Continent'] == 'Oceania'"
+      }
+    ],
+    "params": [
+      {
+        "name": "continent_selection", 
+        "bind": {
+            "input": "select", 
+            "options": [null, "Africa", "Americas", "Asia", "Europe", "Oceania"], 
+            "labels": ["World", "Africa", "Americas", "Asia", "Europe", "Oceania"], 
+            "name": "Continent: "
+        }
+      }
+    ], 
+    "encoding": {
+      "x":{
+        "field": "Land_Area_Log", 
+        "type": "quantitative", 
+        "title": "Land Area (Log)", 
+        "scale": {
+          "type": "log", 
+          "reverse": true
+        }
+      }, 
+      "y": {
+        "field": "Population_Density_Log", 
+        "type": "quantitative", 
+        "title": "Popularity Density (Log)", 
+        "scale": {
+          "type":  "log"
+        }
+      }
+    }, 
+    "layer": [
+        {
+            "mark": "circle",
+            "encoding": {
+                "size":{
+                    "field": "GDP_Per_Capita", 
+                    "type": "quantitative", 
+                    "title": "GDP Per Capita"
+                },
+                "color": {
+                    "field": "Continent", 
+                    "type": "nominal", 
+                    "scale": {
+                      "domain": ["Africa", "Americas", "Asia", "Europe", "Oceania"], 
+                      "range": ["#1f77b4", "#ff7f0e", "#2ca02c", "#e377c2", "#7f7f7f"]
+                    }
+                }, 
+                "opacity": {
+                    "value": 0.8
+                },
+                "tooltip": [
+                    {
+                      "field": "Country", 
+                      "type": "nominal"
+                    }, 
+                    {
+                        "field": "Continent", 
+                        "type": "nominal"
+                    }, 
+                    {
+                      "field": "Population_Density", 
+                      "type": "quantitative"
+                    }, 
+                    {
+                      "field": "Land_Area", 
+                      "type": "quantitative" 
+                    }, 
+                    {
+                      "field": "GDP", 
+                      "type": "quantitative" 
+                    }, 
+                    {
+                      "field": "Population", 
+                      "type": "quantitative" 
+                    }, 
+                    {
+                      "field": "GDP_Per_Capita", 
+                      "type": "quantitative" 
+                    }
+                ]
+            }
+        }, 
+        {
+            "mark": {
+                "type": "text", 
+                "align": "left", 
+                "baseline": "top", 
+                "dx": 8, 
+                "dy": -8, 
+                "fontSize": 10 
+            }, 
+            "encoding": {
+                "text": {
+                    "field": "Country", 
+                    "type": "nominal"
+                }, 
+                "color": {
+                    "value": "black"
+                }, 
+                "opacity": {
+                    "condition": {
+                        "test": "datum['Country'] == 'Australia' || datum['Country'] == 'Monaco' || datum['Country'] == 'Canada' || datum['Country'] == 'Liechtenstein' || datum['Country'] == 'Singapore'", 
+                        "value": 1
+                    },
+                    "value": 0
+                }, 
+                "tooltip": [
+                    {
+                      "field": "Country", 
+                      "type": "nominal"
+                    }, 
+                    {
+                        "field": "Continent", 
+                        "type": "nominal"
+                    }, 
+                    {
+                      "field": "Population_Density", 
+                      "type": "quantitative", 
+                      "title": "Population Density (P/km2)"
+                    }, 
+                    {
+                      "field": "Land_Area", 
+                      "type": "quantitative", 
+                      "title": "Land Area (km2)"
+                    },
+                    {
+                      "field": "GDP_Per_Capita", 
+                      "type": "quantitative", 
+                      "title": "GDP per capita" 
+                    }, 
+                    {
+                      "field": "GDP", 
+                      "type": "quantitative" 
+                    }, 
+                    {
+                      "field": "Population", 
+                      "type": "quantitative" 
+                    }
+                ]
+            }
+        }
+    ],
+    "config": {
+      "axis": {
+        "grid": false
+      }
+    }
+  }
